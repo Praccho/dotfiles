@@ -116,20 +116,20 @@ source $ZSH/oh-my-zsh.sh
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+#         . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
 
 
 export NVM_DIR="$HOME/.nvm"
@@ -139,3 +139,16 @@ eval "$(zoxide init zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export Z3_SYS_Z3_HEADER=/opt/homebrew/include/z3.h
+export Z3_SYS_Z3_HEADER=/opt/homebrew/include/z3.h
+export PATH="/Library/TeX/texbin:$PATH"
+
+export PATH=$PATH:/Users/praccho/.spicetify
+alias git-nuke='git fetch origin && git reset --hard origin/main && git clean -fd'
+
+# D-Bus session bus for zathura
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/tmp/dbus-session-socket"
+if ! pgrep -f "dbus-daemon.*session" > /dev/null; then
+  rm -f /tmp/dbus-session-socket
+  /opt/homebrew/opt/dbus/bin/dbus-daemon --fork --session --address=unix:path=/tmp/dbus-session-socket
+fi
