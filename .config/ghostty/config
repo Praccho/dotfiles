@@ -21,3 +21,5 @@ macos-icon-screen-color = #282828
 #background-image-fit = stretch
 #background-image-opacity = 0.25
 font-feature = +dlig
+custom-shader = ~/.config/ghostty/shaders/boo-cursor.glsl
+custom-shader-animation = always

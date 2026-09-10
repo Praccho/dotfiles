@@ -1,7 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -16,7 +12,6 @@ ZSH_THEME="robbyrussell"
 SOLARIZED_THEME="dark"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#928374"
 
-source "/Users/praccho/.oh-my-zsh/themes/gruvbox-material-dark.zsh"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -84,6 +79,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+eval "$(zoxide init zsh)"
 
 # User configuration
 
@@ -114,41 +110,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. "$HOME/.local/bin/env"
 
-# # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-#         . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# # <<< conda initialize <<<
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-eval "$(zoxide init zsh)"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export Z3_SYS_Z3_HEADER=/opt/homebrew/include/z3.h
-export Z3_SYS_Z3_HEADER=/opt/homebrew/include/z3.h
-export PATH="/Library/TeX/texbin:$PATH"
-
-export PATH=$PATH:/Users/praccho/.spicetify
-alias git-nuke='git fetch origin && git reset --hard origin/main && git clean -fd'
-
-# D-Bus session bus for zathura
-export DBUS_SESSION_BUS_ADDRESS="unix:path=/tmp/dbus-session-socket"
-if ! pgrep -f "dbus-daemon.*session" > /dev/null; then
-  rm -f /tmp/dbus-session-socket
-  /opt/homebrew/opt/dbus/bin/dbus-daemon --fork --session --address=unix:path=/tmp/dbus-session-socket
-fi
+# Aria CLI completions
+fpath=(~/.zsh/completions $fpath)
+autoload -Uz compinit && compinit
